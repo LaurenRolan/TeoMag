@@ -3,8 +3,8 @@ import numpy as np
 import math
 
 loop=1
-Nx=30
-Ny=30
+Nx=50
+Ny=50
 M=4000
 
 #Matriz potencial
@@ -12,15 +12,11 @@ V = np.zeros((Nx, Ny))
 
 #Matriz de cargas
 Rho = np.zeros((Nx, Ny))
-Rho[Nx/2, Ny/2] = 25
-
-#Condicoes de fronteira
-V[0,:]=50
-V[Nx-1,:]=0
-V[:,1]=0
-V[:,Ny-1]=0
+Rho[9, :] = 50 #carga na placa superior
+Rho[29, :] = -50 #carga na placa inferior
 
 w = math.cos(math.pi/Nx)+math.cos(math.pi/Ny) # Converging Term
+
 Ncount = 0
 while loop==1:
     Rmin=0
@@ -33,8 +29,7 @@ while loop==1:
             Residue = w*(0.25*(V[i-1,j]+V[i+1,j]+V[i,j-1]+V[i,j+1]+Rho[i,j])-V[i,j]);
             Rmin = Rmin + abs(Residue)
             V[i,j]= V[i,j] + Residue
-
-
+            
     Rmin=Rmin/(Nx*Ny) # Average Residue per grid point
 
     if(Rmin>=0.00001):
