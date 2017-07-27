@@ -4,7 +4,7 @@ import math
 
 loop=1
 Nx=50
-Ny=300
+Ny=500
 M=4000
 
 #Matriz potencial
@@ -47,11 +47,12 @@ while loop == 1:
             print "Converge em " + str (Ncount)
             
 #Plota o mapa de calor
+plt.title("Potencial")
 plt.imshow(V, cmap='hot', interpolation='nearest')
 plt.show()
 
 #Plota o mapa vetorial
-y, x = np.mgrid[12:6:100j, 10:-10:100j]
+y, x = np.mgrid[50:-50:100j, 500:-500:100j]
 dy, dx = np.gradient(V)
 fig, ax = plt.subplots()
 ax.quiver(x, y, dx, dy, V)
