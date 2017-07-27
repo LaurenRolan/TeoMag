@@ -47,16 +47,13 @@ for y in range(height2, height1):
 Ncount = 0
 while loop == 1:
     Rmin = 0
-    for i in range(1, Ny-1):
-        for j in range(1, Nx-1):
+    for i in range(Ny-1):
+        for j in range(Nx-1):
             # see if we're close to (x-a)**2 + (y-b)**2 == r**2
-            if abs((x - a) ** 2 + (y - b) ** 2 - r2 ** 2) < EPSILONp ** 2:
-                continue
-            if abs((x - a) ** 2 + (y - b) ** 2 - r1 ** 2) < EPSILONg ** 2:
-                continue
-            Residue = 0.25 * (V[i - 1, j] + V[i + 1, j] + V[i, j - 1] + V[i, j + 1] + Rho[i, j]) - V[i, j]
-            Rmin = Rmin + abs(Residue)
-            V[i, j] = V[i, j] + Residue
+            if((j - a) ** 2 + (i - b) ** 2) >= (r2 ** 2 - EPSILONp ** 2) and ((j - a) ** 2 + (i - b) ** 2) <= (r1 ** 2 - EPSILONg ** 2):
+                Residue = 0.25 * (V[i - 1, j] + V[i + 1, j] + V[i, j - 1] + V[i, j + 1] + Rho[i, j]) - V[i, j]
+                Rmin = Rmin + abs(Residue)
+                V[i, j] = V[i, j] + Residue
     Rmin=Rmin/(Nx*Ny) # Average Residue per grid point
     Ncount = Ncount + 1
     if(Rmin<=0.0000001):
@@ -71,7 +68,7 @@ plt.title("Potencial")
 plt.imshow(V, cmap='hot', interpolation='nearest')
 plt.show()
 
-y, x = np.mgrid[25:-25:100j, 25:-25:100j]
+y, x = np.mgrid[0:-5:100j, 0:-5:100j]
 dy, dx = np.gradient(V)
 fig, ax = plt.subplots()
 ax.quiver(x, y, dx, dy, V)
