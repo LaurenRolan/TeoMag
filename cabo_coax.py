@@ -68,7 +68,7 @@ plt.title("Potencial")
 plt.imshow(V, cmap='hot', interpolation='nearest')
 plt.show()
 
-y, x = np.mgrid[0:-5:100j, 0:-5:100j]
+y, x = np.mgrid[0:-5:50j, 0:-5:50j]
 dy, dx = np.gradient(V)
 fig, ax = plt.subplots()
 ax.quiver(x, y, dx, dy, V)
