@@ -45,6 +45,16 @@ while loop == 1:
         else:
             loop=0
             print "Converge em " + str (Ncount)
-
+            
+#Plota o mapa de calor
 plt.imshow(V, cmap='hot', interpolation='nearest')
 plt.show()
+
+#Plota o mapa vetorial
+y, x = np.mgrid[12:6:100j, 10:-10:100j]
+dy, dx = np.gradient(V)
+fig, ax = plt.subplots()
+ax.quiver(x, y, dx, dy, V)
+ax.set(aspect=1, title='Campo Eletrico')
+plt.show()
+
