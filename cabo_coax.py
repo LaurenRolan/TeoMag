@@ -41,7 +41,7 @@ for i in range(Ny):
 #Para definir o anel interno com +5V
 for y in range(height2, height1):
     for x in range(width2, width1):
-        if abs((x - a)**2 + (y - b)**2 - r2**2) < EPSILONp**2:
+        if (x - a)**2 + (y - b)**2 <= r2 ** 2 - EPSILONp**2:
             V[y, x] = 5
 
 Ncount = 0
